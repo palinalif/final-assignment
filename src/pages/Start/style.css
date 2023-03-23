@@ -1,0 +1,15 @@
+.start-container {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    background-color: rgb(228, 228, 228);
+    border: darkgray solid 2px;
+}
+
+.start-container input {
+    margin: 2px 0 10px 0;
+}
+
+.start-container button {
+    padding: 10px;
+}
