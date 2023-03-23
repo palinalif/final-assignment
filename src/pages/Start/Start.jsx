@@ -17,7 +17,14 @@ const Start = () => {
   const validateName = (event) => {
     event.preventDefault();
     const username = event.target.username.value;
-    socket.emit("adduser", username);
+    socket.emit("adduser", username, (available) => {
+      if (available) {
+        dispatch(addUser(username));
+        navigate("/chatroom");
+      } else {
+        console.log("Username is taken");
+      }
+    });
     // if the return value from adduser is true, navigate to the chatrooms page
   };
 
