@@ -1,31 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../actions/userActions";
+import { CONNECT_SOCKET } from "../../constants";
 
 const Start = () => {
   const navigate = useNavigate();
   const socket = useSelector(({ socket }) => socket);
   const dispatch = useDispatch();
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     console.log("connecting to socket...");
-    dispatch({ type: 'CONNECT_SOCKET' });
+    dispatch({ type: CONNECT_SOCKET });
+    socket.on("connect", () => {
+      console.log("Socket connected!")
+      setIsConnected(true);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Socket disconnected.");
+      setIsConnected(false);
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("disconnect");
+    };
   }, []);
 
   const validateName = (event) => {
     event.preventDefault();
     const username = event.target.username.value;
-    socket.emit("adduser", username, (available) => {
-      if (available) {
-        dispatch(addUser(username));
-        navigate("/chatroom");
-      } else {
-        console.log("Username is taken");
-      }
-    });
-    // if the return value from adduser is true, navigate to the chatrooms page
+    if (isConnected) {
+      socket.emit("adduser", username, (available) => {
+        if (available) {
+          dispatch(addUser(username));
+          navigate("/chatroom");
+        } else {
+          console.log("Username is taken");
+        }
+      });
+    }
+    else {
+      console.log("Socket is not connected");
+    }
+    
   };
 
   return (
