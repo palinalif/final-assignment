@@ -12,7 +12,6 @@ const Start = () => {
   const validateName = (event) => {
     event.preventDefault();
     const username = event.target.username.value;
-    socket.connect();
     socket.emit("adduser", username, (available) => {
       if (available) {
         dispatch(addUser(username));
