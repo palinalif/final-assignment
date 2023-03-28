@@ -1,15 +1,21 @@
 .start-container {
-    display: flex;
-    flex-direction: column;
+    font-family: sans-serif;
     padding: 50px;
     background-color: rgb(228, 228, 228);
     border: darkgray solid 2px;
 }
 
-.start-container input {
-    margin: 2px 0 10px 0;
+.start-container form {
+    display: flex;
+    flex-direction: column;
 }
 
-.start-container button {
+.start-container form input {
+    margin: 2px 0 10px 0;
     padding: 10px;
+}
+
+.submitButton {
+    padding: 10px;
+    font-size: 15px;
 }

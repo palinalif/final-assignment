@@ -1,0 +1,14 @@
+.createChatroomForm {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border: 1px black solid;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.passwordArea {
+    display:flex;
+    flex-direction: column;
+}
