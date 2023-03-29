@@ -10,6 +10,7 @@ const ChatroomList = () => {
     socket.emit("rooms");
 
     socket.on("roomlist", (rooms) => {
+      console.log("roomlist updated!");
       const roomList = Object.keys(rooms).map((key) => ({
         ...rooms[key],
         title: key,

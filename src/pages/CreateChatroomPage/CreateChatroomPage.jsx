@@ -14,9 +14,6 @@ const CreateChatroomPage = () => {
   const createChatroom = (evt) => {
     evt.preventDefault();
 
-    // This cannot be used like this.
-    //const { title, locked, password } = evt.target.elements;
-
     socket.emit(
       "joinroom",
       { room, pass: isLocked ? pass : undefined },
