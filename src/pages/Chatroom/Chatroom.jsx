@@ -11,7 +11,7 @@ const Chatroom = () => {
   return (
     <div className="chatroom-container">
       <MessagesWindow chatroomName={chatroomName}/>
-      <UserList />
+      <UserList chatroomName={chatroomName}/>
     </div>
   );
 };
