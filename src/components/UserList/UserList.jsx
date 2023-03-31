@@ -40,7 +40,7 @@ const UserList = (props) => {
   return (
     <>
     {users.map((username) => (
-      <UserItem data={username} />
+      <UserItem username={username} opped={isOpped}/>
     ))}
     </>
   );
