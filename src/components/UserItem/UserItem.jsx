@@ -1,8 +1,10 @@
 import { socket } from "../../services/socketService";
 import "./style.css";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const UserItem = (props) => {
+  const navigate = useNavigate();
   useEffect(() => {
     socket.connect();
     return () => {
@@ -10,7 +12,7 @@ const UserItem = (props) => {
     }
   });
   const kickUser = () => {
-    socket.emit("kick", {user: props.username}, (success, reason) => {
+    socket.emit("kick", {user: props.username, room: props.roomName}, (success, reason) => {
       if (success) {
         console.log("successfully kicked user");
       }
@@ -20,9 +22,10 @@ const UserItem = (props) => {
     });
   }
   const banUser = () => {
-    socket.emit("ban", {user: props.username}, (success, reason) => {
+    socket.emit("ban", {user: props.username, room: props.roomName}, (success, reason) => {
       if (success) {
         console.log("successfully banned user");
+        
       }
       else {
         console.log("Ban failed, reason: " + reason);
@@ -30,7 +33,7 @@ const UserItem = (props) => {
     });
   }
   const opUser = () => {
-    socket.emit("op", {user: props.username}, (success, reason) => {
+    socket.emit("op", {user: props.username, room: props.roomName}, (success, reason) => {
       if (success) {
         console.log("successfully opped user");
       }
@@ -39,14 +42,12 @@ const UserItem = (props) => {
       }
     });
   }
-  const PMUser = () => {}
   return (
     <div>
         <p>{props.username}</p>
         {props.opped ? <button onClick={kickUser}>Kick</button>: <></>}
         {props.opped ? <button onClick={banUser}>Ban</button> : <></>}
         {props.opped ? <button onClick={opUser}>OP</button> : <></>}
-        <button onClick={PMUser}><span class="material-symbols-outlined">mail</span></button>
     </div>
   );
 };

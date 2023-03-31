@@ -40,7 +40,7 @@ const UserList = (props) => {
   return (
     <>
     {users.map((username) => (
-      <UserItem username={username} opped={isOpped}/>
+      <UserItem username={username} opped={isOpped} chatroomName={chatroomName}/>
     ))}
     </>
   );
