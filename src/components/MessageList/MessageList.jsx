@@ -2,6 +2,7 @@ import "./style.css";
 import { useEffect, useState } from "react";
 import { socket } from "../../services/socketService";
 import MessageItem from "../MessageItem/MessageItem";
+import PropTypes from 'prop-types';
 
 const MessageList = (props) => {
     const [messages, setMessages] = useState([]);
@@ -33,3 +34,7 @@ const MessageList = (props) => {
 };
 
 export default MessageList;
+
+MessageList.propTypes = {
+  chatroomName: PropTypes.string.isRequired
+}

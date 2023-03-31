@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { socket } from "../../services/socketService";
 import UserItem from "../UserItem/UserItem";
+import PropTypes from 'prop-types';
 
 import "./style.css";
 
@@ -47,3 +48,7 @@ const UserList = (props) => {
 };
 
 export default UserList;
+
+UserList.propTypes = {
+  chatroomName: PropTypes.string
+}

@@ -2,6 +2,7 @@ import "./style.css";
 import React from "react";
 import { socket } from "../../services/socketService";
 import { useNavigate } from "react-router";
+import PropTypes from 'prop-types';
 
 const ChatroomItem = (props) => {
   let navigate = useNavigate();
@@ -55,3 +56,7 @@ const ChatroomItem = (props) => {
 };
 
 export default ChatroomItem;
+
+ChatroomItem.propTypes = {
+  data: PropTypes.object.isRequired
+}

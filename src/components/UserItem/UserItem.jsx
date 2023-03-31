@@ -2,6 +2,7 @@ import { socket } from "../../services/socketService";
 import "./style.css";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
+import PropTypes from 'prop-types';
 
 const UserItem = (props) => {
   const navigate = useNavigate();
@@ -53,3 +54,9 @@ const UserItem = (props) => {
 };
 
 export default UserItem;
+
+UserItem.propTypes = {
+  roomName: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  opped: PropTypes.bool.isRequired
+}
