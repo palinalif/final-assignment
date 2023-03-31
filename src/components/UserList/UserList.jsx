@@ -9,6 +9,7 @@ const UserList = (props) => {
   const [ops, setOps] = useState([]);
   const [isOpped, setIsOpped] = useState(false);
   useEffect(() => {
+    socket.connect();
     socket.on("updateusers", (room, users, ops) => {
       console.log("User list was updated");
       console.log(room);
@@ -16,12 +17,13 @@ const UserList = (props) => {
       console.log(ops);
 
       if (room === props.chatroomName) {
+        console.log("room matches the current chatroom");
         setUsers(users);
         setOps(ops);
       }
       
       const user = localStorage.getItem("username");
-      if (users.indexOf(user) !== -1) {
+      if (ops.indexOf(user) !== -1) {
         setIsOpped(true);
       }
       else {
@@ -31,6 +33,7 @@ const UserList = (props) => {
     // Disconnect from the socket when the component unmounts
     return () => {
       socket.off("updateusers");
+      socket.disconnect();
     };
   }, []);
 

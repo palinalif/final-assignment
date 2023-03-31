@@ -1,15 +1,34 @@
 import "./style.css";
 import React from "react";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../actions/userActions";
 import { socket } from "../../services/socketService";
 
 const CreateChatroomPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [isLocked, setIsLocked] = useState(false);
   const [room, setRoom] = useState("");
   const [pass, setPass] = useState("");
+
+  useEffect(() => {
+    socket.connect();
+    // check if user is logged in
+    const username = localStorage.getItem("username")
+    if (username != null) {
+      socket.emit("adduser", username, (available) => {
+        if (available) {
+          dispatch(addUser(username));
+        }
+      });
+    }
+    else {
+      navigate("/");
+    }
+  }, []);
 
   const createChatroom = (evt) => {
     evt.preventDefault();

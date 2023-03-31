@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import MessageList from "../MessageList/MessageList";
 import { socket } from "../../services/socketService";
@@ -7,8 +7,15 @@ const MessagesWindow = (props) => {
   const [message, setMessage] = useState("");
   const sendMessage = (evt) => {
     evt.preventDefault();
+    socket.connect();
     socket.emit("sendmsg", {roomName: props.chatroomName, msg: message});
   }
+
+  useEffect(() => {
+    return () => {
+      socket.disconnect();
+    }
+  });
 
   const updateMessage = (evt) => {
     setMessage(evt.target.value);

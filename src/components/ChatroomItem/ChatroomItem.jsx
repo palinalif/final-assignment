@@ -21,6 +21,7 @@ const ChatroomItem = (props) => {
     }
     // emit joinroom event
     let chatroomName = props.data.title;
+    socket.connect();
     socket.emit("joinroom",
     { chatroomName, pass: pass },
     (success, reason) => {

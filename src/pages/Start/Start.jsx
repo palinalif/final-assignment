@@ -9,9 +9,8 @@ const Start = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const validateName = (event) => {
-    event.preventDefault();
-    const username = event.target.username.value;
+  const addUserToSocket = (username) => {
+    socket.connect();
     socket.emit("adduser", username, (available) => {
       if (available) {
         dispatch(addUser(username));
@@ -20,9 +19,22 @@ const Start = () => {
         console.log("Username is taken");
       }
     });
-  };
+  }
 
-  // TOOD: if username exists in localstorage, automatically redirect to chatroom w/ previous username
+  const validateName = (event) => {
+    event.preventDefault();
+    const username = event.target.username.value;
+    addUserToSocket(username);
+};
+
+  useEffect(() => {
+    if (localStorage.getItem("username") != null) {
+      addUserToSocket(localStorage.getItem("username"));
+    }
+    return () => {
+      socket.disconnect();
+    }
+  }, []);
 
   return (
     <div className="start-container">
