@@ -48,6 +48,7 @@ const CreateChatroomPage = () => {
         }
       }
     );
+    socket.emit("rooms"); // to update chatroomList
   };
 
   const handleLockedChange = (evt) => {
