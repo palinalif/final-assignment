@@ -29,7 +29,7 @@ const Chatroom = () => {
           navigate("/chatrooms");
         }
       });
-      socket.on("kicked", () => {
+      socket.on("kicked", (room, user, localUsername) => {
         if (room == chatroomName && user == username) {
           alert("You have been kicked from " + room + ".");
           navigate("/chatrooms");

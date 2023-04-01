@@ -9,6 +9,7 @@ const UserList = (props) => {
   const [users, setUsers] = useState([]);
   const [ops, setOps] = useState([]);
   const [isOpped, setIsOpped] = useState(false);
+  const [userList, setUserList] = useState([]);
   useEffect(() => {
     socket.connect();
     socket.on("updateusers", (room, users, ops) => {
@@ -18,6 +19,7 @@ const UserList = (props) => {
 
       const usersList = Object.keys(users);
       usersList.concat(Object.keys(ops));
+      setUserList(usersList);
 
       console.log(usersList);
 
@@ -44,8 +46,8 @@ const UserList = (props) => {
 
   return (
     <>
-    {usersList.map((username) => (
-      <UserItem username={username} opped={isOpped} chatroomName={chatroomName}/>
+    {userList.map((username) => (
+      <UserItem username={username} opped={isOpped} chatroomName={props.chatroomName}/>
     ))}
     </>
   );
