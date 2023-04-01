@@ -10,7 +10,6 @@ const ChatroomItem = (props) => {
     console.log("joining " + props.data.title + "...");
     let pass = undefined;
     if (props.data.locked) {
-      console.log(props.data.password);
       while(pass !== props.data.password){
         pass = window.prompt("Room is locked, please enter password:", undefined);
         if (pass === null || pass === "") {
@@ -24,7 +23,7 @@ const ChatroomItem = (props) => {
     let chatroomName = props.data.title;
     socket.connect();
     socket.emit("joinroom",
-    { chatroomName, pass: pass },
+    { room: chatroomName, pass: pass },
     (success, reason) => {
       if (success) {
         navigate(`/chatrooms/${chatroomName}`);
