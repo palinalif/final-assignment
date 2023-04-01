@@ -14,8 +14,12 @@ const UserList = (props) => {
     socket.on("updateusers", (room, users, ops) => {
       console.log("User list was updated");
       console.log(room);
-      console.log(users); // does users include every user or every non-op user? will need to check
-      console.log(ops);
+      console.log(users);
+
+      const usersList = Object.keys(users);
+      usersList.concat(Object.keys(ops));
+
+      console.log(usersList);
 
       if (room === props.chatroomName) {
         console.log("room matches the current chatroom");
@@ -40,7 +44,7 @@ const UserList = (props) => {
 
   return (
     <>
-    {users.map((username) => (
+    {usersList.map((username) => (
       <UserItem username={username} opped={isOpped} chatroomName={chatroomName}/>
     ))}
     </>
