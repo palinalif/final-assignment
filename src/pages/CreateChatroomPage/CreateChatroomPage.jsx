@@ -14,7 +14,7 @@ const CreateChatroomPage = () => {
   const [room, setRoom] = useState("");
   const [pass, setPass] = useState("");
 
-  useEffect(() => {
+  /*useEffect(() => {
     socket.connect();
     // check if user is logged in
     const username = localStorage.getItem("username")
@@ -28,7 +28,7 @@ const CreateChatroomPage = () => {
     else {
       navigate("/");
     }
-  }, []);
+  }, []);*/
 
   const createChatroom = (evt) => {
     evt.preventDefault();

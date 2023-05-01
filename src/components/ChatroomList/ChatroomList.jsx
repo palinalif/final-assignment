@@ -12,7 +12,7 @@ const ChatroomList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    socket.connect();
+    /*socket.connect();
     // check if user is logged in
     const username = localStorage.getItem("username")
     if (username != null) {
@@ -24,7 +24,7 @@ const ChatroomList = () => {
     }
     else {
       navigate("/");
-    }
+    }*/
 
     // Do the chatroom list stuff
     socket.emit("rooms");

@@ -15,30 +15,32 @@ const Chatroom = () => {
   useEffect(() => {
     socket.connect();
     // check if user is logged in
+    
     const username = localStorage.getItem("username")
-    if (username != null) {
+    /*if (username != null) {
       socket.emit("adduser", username, (available) => {
         if (available) {
           dispatch(addUser(username));
         }
       });
+      */
       // watch for logged in user being banned, kicked, and opped so we can update accordingly
       socket.on("banned", (room, user, localUsername) => {
-        if (room == chatroomName && user == username) {
+        if (room === chatroomName && user === username) {
           alert("You have been banned from " + room + ".");
           navigate("/chatrooms");
         }
       });
       socket.on("kicked", (room, user, localUsername) => {
-        if (room == chatroomName && user == username) {
+        if (room === chatroomName && user === username) {
           alert("You have been kicked from " + room + ".");
           navigate("/chatrooms");
         }
       });
-    }
+    /*}
     else {
       navigate("/");
-    }
+    }*/
   }, []);
 
   return (
