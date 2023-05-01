@@ -13,7 +13,7 @@ const MessagesWindow = (props) => {
     if (message.startsWith("/whisper")) {
       let recUsername = message.split(" ")[1];
       let whisperMsg = message.split(" ").slice(2).join(" ");
-      socket.emit("privatemsg", {}, (success) => {
+      socket.emit("privatemsg", {/*what goes in here??*/}, (success) => {
         if (success) {
           console.log("private message sent successfully!");
           // Display PM client side somehow?
@@ -22,7 +22,9 @@ const MessagesWindow = (props) => {
       })
     }
     else {
-      socket.emit("sendmsg", {roomName: props.chatroomName, msg: message});
+      socket.emit("sendmsg", {roomName: props.chatroomName, msg: message}, (success) => {
+        console.log(success);
+      });
     }
   }
 
@@ -35,11 +37,11 @@ const MessagesWindow = (props) => {
   const updateMessage = (evt) => {
     setMessage(evt.target.value);
   }
-  return (
+  return (  
     <div className="messages-window-container">
         <MessageList chatroomName={props.chatroomName}/>
-        <form onSubmit={sendMessage}>
-          <input type="text" value={message} name="message" onChange={updateMessage}/>
+        <form onSubmit={sendMessage} className="messages-window-chat">
+          <input type="text" value={message} name="message" onChange={updateMessage} className="messages-window-chat-input"/>
           <input type="submit" value="Send"/>
         </form>
     </div>

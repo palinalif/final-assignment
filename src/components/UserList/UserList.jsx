@@ -46,9 +46,11 @@ const UserList = (props) => {
 
   return (
     <>
+    <div className="user-list-container">
     {userList.map((username) => (
       <UserItem username={username} opped={isOpped} chatroomName={props.chatroomName}/>
     ))}
+    </div>
     </>
   );
 };

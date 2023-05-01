@@ -25,11 +25,12 @@ const ChatroomItem = (props) => {
     socket.emit("joinroom",
     { room: chatroomName, pass: pass },
     (success, reason) => {
+      console.log(success);
       if (success) {
         navigate(`/chatrooms/${chatroomName}`);
       } else {
         alert(
-          "Oops, something went wrong and we could not create your chatroom!"
+          "Oops, something went wrong and you could not join this chatroom! Reason: " + reason
         );
         console.log(reason);
       }

@@ -1,0 +1,20 @@
+.messages-window-container {
+    width:80%;
+    height:500px;
+    border: 1px grey solid;
+    display:flex;
+}
+
+.messages-window-chat {
+    display: inline-block;
+    align-self: flex-end;
+}
+
+.messages-window-chat input {
+    padding:10px;
+}
+
+.messages-window-chat-input {
+    width:500px;
+}
+
