@@ -10,9 +10,10 @@ const MessageList = (props) => {
     useEffect(() => {
     socket.on("updatechat", (room, messageHistory) => {
       if (room === props.chatroomName) {
-        console.log("This room was updated!");
+        console.log("This room's chat history was updated!");
         setMessages(messageHistory);
       }
+      console.log(messages);
     });
     // Disconnect from the socket when the component unmounts
     return () => {
@@ -24,7 +25,7 @@ const MessageList = (props) => {
   return (
     <div>
       {messages.map((message) => (
-        <MessageItem data={message} />
+        <MessageItem sender={message.nick} message={message.message} timestamp={message.timestamp} />
       ))}
     </div>
   );

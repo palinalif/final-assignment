@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const MessageItem = (props) => {
   return (
-    <p>{props.data}</p>
+    <p>[{props.timestamp}] {props.sender}: {props.message}</p>
   );
 };
 
