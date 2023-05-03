@@ -12,7 +12,6 @@ const UserList = (props) => {
   const [userList, setUserList] = useState([]);
   useEffect(() => {
     socket.on("updateusers", (room, users, ops) => {
-
       const usersList = Object.keys(users);
       usersList.concat(Object.keys(ops));
       setUserList(usersList);
@@ -25,8 +24,6 @@ const UserList = (props) => {
       }
       
       const user = localStorage.getItem("username");
-      console.log("localOps:");
-      console.log(localOps);
       if (localOps.indexOf(user) !== -1) {
         setIsOpped(true); 
       }

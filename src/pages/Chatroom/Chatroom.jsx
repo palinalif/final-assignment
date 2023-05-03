@@ -12,17 +12,14 @@ const Chatroom = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const leaveRoom = () => {
+    socket.emit("partroom", chatroomName);
+    navigate("/chatrooms");
+  }
   useEffect(() => {
     // check if user is logged in
     
     const username = localStorage.getItem("username")
-    /*if (username != null) {
-      socket.emit("adduser", username, (available) => {
-        if (available) {
-          dispatch(addUser(username));
-        }
-      });
-      */
       // watch for logged in user being banned, kicked, and opped so we can update accordingly
       socket.on("banned", (room, user, localUsername) => {
         if (room === chatroomName && user === username) {
@@ -36,14 +33,11 @@ const Chatroom = () => {
           navigate("/chatrooms");
         }
       });
-    /*}
-    else {
-      navigate("/");
-    }*/
   }, []);
 
   return (
     <div className="chatroom-container">
+      <button onClick={leaveRoom}>Leave Room</button>
       <MessagesWindow chatroomName={chatroomName}/>
       <UserList chatroomName={chatroomName}/>
     </div>
