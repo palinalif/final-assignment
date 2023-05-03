@@ -12,23 +12,6 @@ const ChatroomList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    /*socket.connect();
-    // check if user is logged in
-    const username = localStorage.getItem("username")
-    if (username != null) {
-      socket.emit("adduser", username, (available) => {
-        if (available) {
-          dispatch(addUser(username));
-        }
-      });
-    }
-    else {
-      navigate("/");
-    }*/
-
-    // Do the chatroom list stuff
-    socket.emit("rooms");
-
     socket.on("roomlist", (rooms) => {
       const roomList = Object.keys(rooms).map((key) => ({
         ...rooms[key],
@@ -36,10 +19,11 @@ const ChatroomList = () => {
       }));
       setChatrooms(roomList);
     });
+
+    socket.emit("rooms");
     // Disconnect from the socket when the component unmounts
     return () => {
       socket.off("roomlist");
-      socket.disconnect();
     };
   }, []);
 

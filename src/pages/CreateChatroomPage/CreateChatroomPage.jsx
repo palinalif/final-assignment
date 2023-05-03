@@ -14,22 +14,6 @@ const CreateChatroomPage = () => {
   const [room, setRoom] = useState("");
   const [pass, setPass] = useState("");
 
-  /*useEffect(() => {
-    socket.connect();
-    // check if user is logged in
-    const username = localStorage.getItem("username")
-    if (username != null) {
-      socket.emit("adduser", username, (available) => {
-        if (available) {
-          dispatch(addUser(username));
-        }
-      });
-    }
-    else {
-      navigate("/");
-    }
-  }, []);*/
-
   const createChatroom = (evt) => {
     evt.preventDefault();
 

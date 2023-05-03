@@ -10,7 +10,6 @@ const Start = () => {
   const dispatch = useDispatch();
 
   const addUserToSocket = (username) => {
-    socket.connect();
     socket.emit("adduser", username, (available) => {
       if (available) {
         dispatch(addUser(username));
@@ -30,9 +29,6 @@ const Start = () => {
   useEffect(() => {
     if (localStorage.getItem("username") != null) {
       addUserToSocket(localStorage.getItem("username"));
-    }
-    return () => {
-      socket.disconnect();
     }
   }, []);
 

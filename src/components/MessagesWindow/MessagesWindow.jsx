@@ -8,7 +8,6 @@ const MessagesWindow = (props) => {
   const [message, setMessage] = useState("");
   const sendMessage = (evt) => {
     evt.preventDefault();
-    socket.connect();
     // check if message is a command
     if (message.startsWith("/whisper")) {
       let recUsername = message.split(" ")[1];
@@ -27,13 +26,7 @@ const MessagesWindow = (props) => {
       });
     }
   }
-
-  useEffect(() => {
-    return () => {
-      socket.disconnect();
-    }
-  });
-
+  
   const updateMessage = (evt) => {
     setMessage(evt.target.value);
   }

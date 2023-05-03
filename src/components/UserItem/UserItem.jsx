@@ -6,12 +6,6 @@ import PropTypes from 'prop-types';
 
 const UserItem = (props) => {
   const navigate = useNavigate();
-  useEffect(() => {
-    socket.connect();
-    return () => {
-      socket.disconnect();
-    }
-  });
   const kickUser = () => {
     socket.emit("kick", {user: props.username, room: props.roomName}, (success, reason) => {
       if (success) {

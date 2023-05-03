@@ -11,7 +11,6 @@ const UserList = (props) => {
   const [isOpped, setIsOpped] = useState(false);
   const [userList, setUserList] = useState([]);
   useEffect(() => {
-    socket.connect();
     socket.on("updateusers", (room, users, ops) => {
       console.log("User list was updated");
       console.log(room);
@@ -40,7 +39,6 @@ const UserList = (props) => {
     // Disconnect from the socket when the component unmounts
     return () => {
       socket.off("updateusers");
-      socket.disconnect();
     };
   }, []);
 

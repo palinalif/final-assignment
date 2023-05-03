@@ -13,7 +13,6 @@ const Chatroom = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socket.connect();
     // check if user is logged in
     
     const username = localStorage.getItem("username")
