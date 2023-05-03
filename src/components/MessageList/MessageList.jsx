@@ -9,11 +9,8 @@ const MessageList = (props) => {
 
     useEffect(() => {
     socket.on("updatechat", (room, messageHistory) => {
-      console.log("Chat was updated");
-      console.log(room);
-      console.log(messageHistory);
-
       if (room === props.chatroomName) {
+        console.log("This room was updated!");
         setMessages(messageHistory);
       }
     });
