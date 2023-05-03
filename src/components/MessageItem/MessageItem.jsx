@@ -15,5 +15,7 @@ const MessageItem = (props) => {
 export default MessageItem;
 
 MessageItem.propTypes = {
-  data: PropTypes.string.isRequired
+  timestamp: PropTypes.string.isRequired,
+  sender: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired
 }

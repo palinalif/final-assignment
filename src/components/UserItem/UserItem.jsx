@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import PropTypes from 'prop-types';
 
 const UserItem = (props) => {
+  console.log("Opped? : " + props.opped);
   const navigate = useNavigate();
   const kickUser = () => {
     socket.emit("kick", {user: props.username, room: props.roomName}, (success, reason) => {
